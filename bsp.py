@@ -9,7 +9,7 @@ class BinaryTree:
         self.data = []
 
     def printTree(self):
-        """Prints the all tree nodes 'Name' attribute in a binary tree format"""
+        """Prints the all tree nodes 'Name' attribute in a binary tree format (needs to be improved)"""
         queue = [self]
         PrintString = ''
 
@@ -212,13 +212,7 @@ class BSP:
 
                         compareLoS = TreePointer.data[0].compare(SightSegment)
                         if compareLoS == 'P':
-                            for line in TreePointer.data:
-                                # NumOfIntersections += 1
-                                if SightSegment.split(line) is not None:
-                                    IsIntersection = True
-                                    break
-
-                            if IsIntersection:
+                            if SightSegment.split(TreePointer.data[0]) is not None:
                                 LoS[FromIndex][ToIndex] = 'F'
                                 LoS[ToIndex][FromIndex] = 'F'
                             else:
