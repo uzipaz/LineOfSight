@@ -34,8 +34,8 @@ def generateRandomScene(
         n,
         width,
         height,
-        MinLength=10,
-        MaxLength=50,
+        MinLength=50,
+        MaxLength=300,
         isUniform=True):
     """
     Randomnly generates a list of non intersecting line segments
@@ -123,10 +123,11 @@ def main():
 
     bsptree = BSP()
     isUniform = True
+    print('Generating line segments')
     bsptree.tree.data = generateRandomScene(
-        512, SCREEN_WIDTH, SCREEN_HEIGHT, isUniform=isUniform)
+        20, SCREEN_WIDTH, SCREEN_HEIGHT, isUniform=isUniform)
 
-    points = generatePoints(40, SCREEN_WIDTH, SCREEN_HEIGHT, isUniform=isUniform)
+    points = generatePoints(4, SCREEN_WIDTH, SCREEN_HEIGHT, isUniform=isUniform)
 
     # set up pygame
     pygame.init()
@@ -141,7 +142,6 @@ def main():
     WHITE = (255, 255, 255)
     ORANGE = (255, 127, 0)
     GREEN = (0, 255, 0)
-    YELLOW = (255, 255, 0)
 
     # draw the white background onto the surface
     windowSurface.fill(BLACK)
@@ -157,10 +157,10 @@ def main():
     print('Generating tree')
     bsptree.generateTree(bsptree.tree, UseHeuristic='even')
 
-    pygame.draw.circle(
-        windowSurface, YELLOW, (int(
-            bsptree.tree.data[0].getMidPoint().x), int(
-            bsptree.tree.data[0].getMidPoint().y)), 4, 4)
+    #pygame.draw.circle(
+    #    windowSurface, YELLOW, (int(
+    #        bsptree.tree.data[0].getMidPoint().x), int(
+    #        bsptree.tree.data[0].getMidPoint().y)), 4, 4)
 
     LoS = bsptree.checkLoS(points)
 
@@ -175,8 +175,8 @@ def main():
                     (points[iTo].x,
                      points[iTo].y))
 
-    print(bsptree.tree.printTree())
-    print(bsptree.countNodes(bsptree.tree))
+    #print(bsptree.tree.printTree())
+    #print(bsptree.countNodes(bsptree.tree))
 
     # draw the window onto the screen
     pygame.display.update()
